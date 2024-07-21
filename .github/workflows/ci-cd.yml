@@ -24,6 +24,10 @@ jobs:
     - name: Run tests
       run: npm test
 
+    - name: Verify Jest installation
+      run: npm ls jest
+
+
   build:
     runs-on: ubuntu-latest
     needs: test
