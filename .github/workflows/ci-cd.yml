@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - master  
+      - master 
 
 jobs:
   test:
@@ -16,13 +16,13 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'  
+        node-version: '16'
 
     - name: Install dependencies
       run: npm install
 
     - name: Run tests
-      run: npm test
+      run: npx jest  
 
   build:
     runs-on: ubuntu-latest
@@ -56,5 +56,8 @@ jobs:
       with:
         username: bolyfadel
         password: Fadel123456
-    - name: Push Docker image
-      run: docker tag my-app:latest bolyfadel/my-app:latest && docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+
+    - name: Tag and Push Docker image
+      run: |
+        docker tag my-app:latest bolyfadel/my-app:latest
+        docker push bolyfadel/my-app:latest
